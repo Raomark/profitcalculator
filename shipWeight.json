@@ -1,0 +1,67 @@
+[
+	{
+		"weight": "0.51 - 1.00",
+		"bmr": 17,
+		"provincial": 28
+	},
+	{
+		"weight": "1.01 - 2.00",
+		"bmr": 21,
+		"provincial": 33
+	},
+	{
+		"weight": "2.01 - 3.00",
+		"bmr": 24,
+		"provincial": 37
+	},
+	{
+		"weight": "3.01 - 4.00",
+		"bmr": 34,
+		"provincial": 40
+	},
+	{
+		"weight": "4.01 - 5.00",
+		"bmr": 39,
+		"provincial": 46 
+	},
+	{
+		"weight": "5.01 - 6.00",
+		"bmr": 44,
+		"provincial": 51 
+	},
+	{
+		"weight": "6.01 - 7.00",
+		"bmr": 50,
+		"provincial": 57 
+	},
+	{
+		"weight": "7.01 - 8.00",
+		"bmr": 66,
+		"provincial": 73 
+	},
+	{
+		"weight": "8.01 - 9.00",
+		"bmr": 72,
+		"provincial": 79
+	},
+	{
+		"weight": "9.01 - 10.00",
+		"bmr": 77,
+		"provincial": 84 
+	},
+	{
+		"weight": "10.01 - 11.00",
+		"bmr": 83,
+		"provincial": 90 
+	},
+	{
+		"weight": "11.01 - 12.00",
+		"bmr": 88,
+		"provincial": 95
+	},
+	{
+		"weight": "12.01 - 13.00",
+		"bmr": 94,
+		"provincial": 101 
+	}
+]
