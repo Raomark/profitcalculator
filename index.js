@@ -29,23 +29,29 @@ calBtn.addEventListener("click",() => {
 
 	
 	if(cost == " " && price == " " && sellerVoucher == " " && spVoucher == " " && shipFeeBuyer == " " && shipFeeShopee == " "){
-		empText.classList.add('alert')
-		empText.classList.add('show')
-		empText.classList.add('open')
-		empText.classList.add('open')
+		empText.classList.remove("close");
+		empText.classList.add("alert");
+		empText.classList.add("show");
+
+		setTimeout(() => {
+			empText.classList.add("hid");
+			empText.classList.add("close-1");
+			
+		}, 4000);
+	
+		
+	
+
 	}else{
 		disPrice.innerHTML = `ราคาสินค้าที่จ่ายรวมส่วนลด = ${priceTotal}`;
 		disFee.innerHTML = `ค่าธุรกรรมการชำระเงิน 3.21% = ${paymentTransCost}`;
 		disCom.innerHTML = `ค่ธรรมเนียมการขาย 7.48% = ${comFee}`;
 		disResult.innerHTML = `รวมยอดเงินที่ผู้ขายได้รับ = ${result}`;
 		disprofit.innerHTML = `กำไร(หักค่าส่ง) = ${profit}`;
+		empText.classList.add("close");
 	}
 
-	// if(profit == -12 && result == 0 && comFee == 0 && paymentTransCost == 0 && priceTotal == 0){
-	// 	disprofit.innerHTML = `กำไร(หักค่าส่ง) = 0`
-	// }else{
-	// 	disprofit.innerHTML = `กำไร(หักค่าส่ง) = ${profit}`
-	// }
+
 
 })
 

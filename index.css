@@ -8,12 +8,18 @@
 body {
 	font-family: "Kanit", sans-serif;
 	background-color: #e5e5e5;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .container{
-	max-width: 500px;
+	max-width: 700px;
 	width: 100%;
 	overflow: hidden;
+	padding: 24px;
+	margin: 0 2rem;
 }
 
 label{
@@ -55,10 +61,43 @@ input[type="text"]:focus{
 	animation:  show_slide 1s ease forwards;
 }
 
+.close{
+	display: none;
+}
+
+.close-1.hid {
+	animation: hid 2s ease forwards;
+}
+
+@keyframes hid{
+	100%{
+		transform: translateX(110%);
+		display: none;
+	}
+}
+
+
 @keyframes show_slide {
 	0%{
 		transform: translateX(100%);
 	}
 }
 
- 
+@media screen and (max-width: 520px) {
+	body{
+		font-size: 15px;
+	}
+	.btn-g{
+		display: flex;
+		flex-direction: column;
+	}
+	.btn-g-cal{
+		margin-bottom: 16px;
+	}
+	.form-detail-section2 {
+		display: flex;
+		flex-direction: column;
+	}
+
+}
+
