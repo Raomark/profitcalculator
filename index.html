@@ -1,132 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=
-	, initial-scale=1.0">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-	<link rel="stylesheet" href="index.css">
-	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-	<title>คำนวนกำไร Shopee</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code to Link Converter</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS for better styling */
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 10px; /* Added padding for better mobile experience */
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        .form-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .output-container {
+            margin-top: 20px;
+            display: none;
+        }
+        .output-container h5 {
+            margin-bottom: 10px;
+        }
+        .link-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px 0;
+        }
+        .link-item a {
+            font-size: 18px;
+            color: #6f42c1;
+            flex-grow: 1;
+        }
+        .copy-button {
+            margin-left: 10px;
+        }
+        .login-container {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-<div class="container  shadow-sm bg-body rounded-3">
 
-	<h2 class="text-center mb-4">คำนวนกำไร Shopee</h2>
-
-	<form onsubmit="return false" class="form-detail">
-		<!-- section 1 ราคา -->
-		<div class="row form-detail-section1">
-			<div class="mb-3 col">
-				<label class="form-label">ราคาสินค้า</label>
-				<input type="text" class="form-control" id="price">
-			</div>
-			<div class="mb-3 col">
-				<label for="exampleInputEmail1" class="form-label">ต้นทุนสินค้า</label>
-				<input type="text" class="form-control" id="cost">
-			</div>  
-		</div>
-		
-		<!-- section 2 ส่วนลด -->
-		<div class="row form-detail-section2 row">
-			<div class="mb-3 col">
-				<label class="form-label">ส่วนลดร้านค้า</label>
-				<input type="text" class="form-control" id="slVoucher">
-			</div>
-  
-		  	<div class="mb-3 col">
-				<label class="form-label">ส่วนลดแพลตฟอร์ม</label>
-			   	<input type="text" class="form-control" id="spVoucher">
-		  	</div>
-		  	<div class="mb-3 col">
-				<label class="form-label">โค้ดส่วนลด</label>
-			   	<input type="text" class="form-control" id="spVoucher">
-		  	</div>
-		</div>
-
-		<!-- section 3 ค่าส่ง -->
-		<div class="row form-detail-section3 row">
-			<div class="mb-3 col">
-				<label class="form-label data-bs-toggle="tooltip" data-bs-placement="top" title="ส่งฟรีใส่เลข 0 top"">ค่าจัดส่งจากผู้ซื้อ</label>
-				<input type="text" class="form-control" id="buyerFee">
-			</div>
-  
-		  	<div class="mb-3 col">
-				<label class="form-label" >
-					ค่าจัดส่งที่ร้านชำระ
-				</label>
-				<input type="text" class="form-control" id="shipFee">
-		  	</div>
-		</div>
-
-		<!------- Button trigger modal ------->
-		<button type="button" class="btn ship-check-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-			เช็คค่าขนส่ง SPX (ISHIP)
-		</button>
-	
-		<!-------- Modal -------->
-		<div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-				<h5 class="modal-title" id="staticBackdropLabel">ค่าขนส่ง SPX</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<table class="table table-hover table-bordered  table-striped">
-						<thead>
-						  <tr>
-							<th scope="col">น้ำหนัก(KG)</th>
-							<th scope="col">กทมและปริมณฑล</th>
-							<th scope="col">ต่างจังหวัด</th>
-						  </tr>
-						</thead>
-						<tbody id="data-output"></tbody>
-					  </table>
-				</div>
-				<div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
-				</div>
-			</div>
-			</div>
-		</div>
-
-		<!-------- Button Cal & Reset -------->
-		<div class="btn-form mt-3 row btn-g">
-			<div class="col  btn-g-cal">
-				<button type="submit" class="btn btn-primary "id="cal">
-					คำนวณ
-				</button>
-			</div>
-			<div class="col  btn-g-reset">
-				<button type="reset" class="btn btn-danger" id="reset">
-					reset
-				</button>
-			</div>
-		</div>
-	</form>
-
-	  <div class="display mt-1 lh-lg">
-
-			<div class="close" id="emp-text">
-				<span class="warning-text">กรุณากรอกข้อมูลอย่างน้อย 1 ช่อง</span>
-				<i class='bx bx-error icon-error'></i>
-			</div>
-
-			<div id="price"></div>
-			<div id="fee"></div>
-			<div id="com"></div>
-			<div id="result"></div>
-			<div id="profit"></div>
-	  </div>
-
-	  <div class="predict"></div>  
-
+<div class="form-container" id="login-container">
+    <div class="form-title">Login to Access</div>
+    <form id="login-form">
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
 </div>
 
-<script src="index.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<div class="form-container" id="qr-container" style="display: none;">
+    <div class="form-title">QR Code to Link Converter</div>
+    <form id="qr-form">
+        <div class="mb-3">
+            <label for="fileInput" class="form-label">Upload your QR Code images</label>
+            <input type="file" class="form-control" id="fileInput" accept="image/*" multiple>
+        </div>
+        <button type="button" class="btn btn-primary w-100" onclick="decodeQRCode()">Convert to Links</button>
+    </form>
+
+    <div class="output-container" id="output-container">
+        <h5>Decoded URLs:</h5>
+        <div id="decoded-links"></div>
+    </div>
+</div>
+
+<!-- ZXing Library for decoding QR Code -->
+<script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.18.6/umd/index.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const validPassword = "yourPassword"; // Set your desired password here
+    const validStartTime = "00:00";
+    const validEndTime = "23:59";
+
+    function isWithinValidTime() {
+        const now = new Date();
+        const currentTime = now.toTimeString().slice(0, 5);
+        return currentTime >= validStartTime && currentTime <= validEndTime;
+    }
+
+    function showLogin() {
+        document.getElementById("login-container").style.display = "block";
+    }
+
+    function showQrConverter() {
+        document.getElementById("qr-container").style.display = "block";
+        document.getElementById("login-container").style.display = "none";
+    }
+
+    document.getElementById("login-form").onsubmit = function(event) {
+        event.preventDefault(); // Prevent default form submission
+        const passwordInput = document.getElementById("password").value;
+
+        if (passwordInput === validPassword && isWithinValidTime()) {
+            localStorage.setItem("isLoggedIn", "true"); // Store login status
+            showQrConverter();
+        } else {
+            alert("Invalid password or out of allowed time!");
+        }
+    };
+
+    function checkLogin() {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn === "true" && isWithinValidTime()) {
+            showQrConverter();
+        } else {
+            showLogin();
+        }
+    }
+
+    function decodeQRCode() {
+        const fileInput = document.getElementById('fileInput');
+        const outputContainer = document.getElementById('output-container');
+        const decodedLinksContainer = document.getElementById('decoded-links');
+
+        if (fileInput.files.length === 0) {
+            alert("Please upload at least one QR Code image.");
+            return;
+        }
+
+        decodedLinksContainer.innerHTML = ''; // Clear previous results
+        const promises = []; // Store promises for each file
+
+        for (const file of fileInput.files) {
+            const reader = new FileReader();
+            const promise = new Promise((resolve, reject) => {
+                reader.onload = function () {
+                    const img = new Image();
+                    img.src = reader.result;
+
+                    img.onload = function () {
+                        const codeReader = new ZXing.BrowserQRCodeReader();
+                        codeReader.decodeFromImageElement(img)
+                            .then(result => {
+                                const linkItem = document.createElement('div');
+                                linkItem.className = 'link-item';
+                                const linkElement = document.createElement('a');
+                                linkElement.href = result.text;
+                                linkElement.textContent = result.text;
+                                linkElement.target = '_blank'; // Open link in new tab
+
+                                const copyButton = document.createElement('button');
+                                copyButton.className = 'btn btn-outline-secondary copy-button';
+                                copyButton.textContent = 'Copy Link';
+                                copyButton.onclick = () => {
+                                    navigator.clipboard.writeText(result.text)
+                                        .then(() => {
+                                            alert('Link copied to clipboard!');
+                                        })
+                                        .catch(err => {
+                                            console.error('Could not copy text: ', err);
+                                        });
+                                };
+
+                                linkItem.appendChild(linkElement);
+                                linkItem.appendChild(copyButton);
+                                decodedLinksContainer.appendChild(linkItem);
+                                resolve();
+                            })
+                            .catch(err => {
+                                console.error("Could not decode QR code: ", err);
+                                resolve(); // Still resolve to avoid stopping the loop
+                            });
+                    };
+                };
+            });
+
+            promises.push(promise);
+            reader.readAsDataURL(file);
+        }
+
+        Promise.all(promises).then(() => {
+            if (decodedLinksContainer.children.length > 0) {
+                outputContainer.style.display = 'block'; // Show the output container
+            } else {
+                alert("No QR codes were successfully decoded.");
+            }
+        });
+    }
+
+    // Check login status when the page loads
+    window.onload = checkLogin;
+</script>
 
 </body>
 </html>
